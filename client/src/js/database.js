@@ -4,11 +4,13 @@ const DB_NAME = 'jate';
 const DB_VERSION = 1;
 const OBJECT_STORE_NAME = 'jate';
 
+// Function to initialize the database
 const initDb = async () => {
   try {
     const db = await openDB(DB_NAME, DB_VERSION, {
       upgrade(db) {
         if (!db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+          // Create object store if it doesn't exist
           const store = db.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
           console.log('jate database created', store);
         } else {
@@ -21,6 +23,7 @@ const initDb = async () => {
   }
 };
 
+// Function to add content to the database
 export const putDb = async (content) => {
   try {
     const db = await openDB(DB_NAME, DB_VERSION);
@@ -34,6 +37,7 @@ export const putDb = async (content) => {
   }
 };
 
+// Function to get content from the database
 export const getDb = async () => {
   try {
     const db = await openDB(DB_NAME, DB_VERSION);

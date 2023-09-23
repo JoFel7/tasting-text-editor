@@ -5,18 +5,18 @@ const { InjectManifest } = require("workbox-webpack-plugin");
 
 module.exports = () => {
   return {
-    mode: "development",
+    mode: "development", // Set the mode to development for the webpack build
     entry: {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
     },
     output: {
-      filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "dist"),
+      filename: "[name].bundle.js", // Output file names will be "main.bundle.js" and "install.bundle.js"
+      path: path.resolve(__dirname, "dist"), // Output directory path
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./index.html",
+        template: "./index.html", // Use index.html as a template for generating the HTML
       }),
 
       new WebpackPwaManifest({
@@ -39,8 +39,8 @@ module.exports = () => {
       }),
 
       new InjectManifest({
-        swSrc: "./src-sw.js",
-        swDest: "src-sw.js",
+        swSrc: "./src-sw.js", // Path to your service worker source file
+        swDest: "src-sw.js", // Destination path for the generated service worker
       }),
     ],
 
@@ -48,13 +48,13 @@ module.exports = () => {
       rules: [
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"],
+          use: ["style-loader", "css-loader"], // Use style-loader and css-loader for processing CSS files
         },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
+            loader: "babel-loader", // Use babel-loader for transpiling JavaScript
             options: {
               presets: ["@babel/preset-env"],
               plugins: [
